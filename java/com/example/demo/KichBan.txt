@@ -1,0 +1,11 @@
+Phần 1: Liệt kê các kịch bản lỗi
+Nếu không nắm vững kiến thức về cấu trúc thư viện và cấu hình Spring Boot, bạn sẽ gặp 3 tình huống  sau:
+
+Lỗi "Whitelabel Error Page" (404) do sai Context Path: * Tình huống: Bạn cấu hình server.servlet.context-path=/med-manager nhưng khi mở trình duyệt lại gõ http://localhost:8081/.
+Hậu quả: Trình duyệt báo lỗi 404. Bạn sẽ tưởng code mình sai, nhưng thực tế là bạn quên mất cái "họ tên lót" (context path) của ứng dụng.
+
+Lỗi "Image Not Found" (Vỡ ảnh) do đặt sai thư mục Static: * Tình huống: Bạn để ảnh tại src/main/resources/images thay vì src/main/resources/static/images.
+Hậu quả: Spring Boot mặc định chỉ "mở cửa" cho thư mục static ra bên ngoài. Khi đó, thẻ <img src="/images/doctor.jpg"> sẽ không tìm thấy file, giao diện trông sẽ rất lỗi thời và thiếu chuyên nghiệp.
+
+Lỗi "Internal Server Error" (500) do thiếu Dependency: * Tình huống: Bạn dùng Thymeleaf trong file HTML (th:each, th:text) nhưng trong build.gradle lại quên khai báo implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'.
+Hậu quả: Spring Boot sẽ coi file HTML của bạn là text thuần túy, không render được dữ liệu, hoặc báo lỗi không tìm thấy Template Engine.
